@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acute Stays — Medical Courier &amp; Dispatch, Minnesota</title>
+<meta name="description" content="Acute Stays dispatches insured, certified drivers for specimen, blood, and pharmaceutical courier routes across the Twin Cities metro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12202B;
+    --paper:#EEF0EC;
+    --paper-raised:#E4E7E1;
+    --navy:#1F4E5F;
+    --brick:#A73B2D;
+    --brick-dark:#8A2F23;
+    --line:#C7CBC3;
+    --line-soft:#D9DCD4;
+    --muted:#3F4A46;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,240,236,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:18px;padding-bottom:18px;
+  }
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .wordmark .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--brick);
+    display:inline-block;
+  }
+  .navlinks{display:flex;align-items:center;gap:32px;}
+  .navlinks a{
+    text-decoration:none;
+    font-size:14.5px;
+    color:var(--muted);
+  }
+  .navlinks a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--brick);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:3px;
+    font-size:14.5px;
+    font-weight:500;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    font-family:'IBM Plex Sans', sans-serif;
+    transition:background 0.15s ease;
+  }
+  .btn:hover{background:var(--brick-dark);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{background:var(--paper-raised);}
+  @media (max-width:760px){
+    .navlinks a:not(.btn){display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:86px 0 64px;}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.4vw, 52px);
+    line-height:1.08;
+    max-width:14ch;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    font-size:17.5px;
+    color:var(--muted);
+    max-width:46ch;
+  }
+  .hero .cta-row{
+    margin-top:32px;
+    display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .hero-facts{
+    margin-top:36px;
+    display:flex;gap:28px;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+  .hero-facts span{display:block;}
+  .hero-facts strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    color:var(--ink);
+    font-weight:500;
+  }
+
+  /* Route timeline visual */
+  .route-card{
+    background:var(--navy);
+    color:#EDEEEA;
+    border-radius:6px;
+    padding:30px 26px 26px;
+  }
+  .route-card .route-label{
+    font-size:12.5px;
+    color:#AEC3CB;
+    margin-bottom:22px;
+  }
+  .route-track{
+    position:relative;
+    padding-left:4px;
+  }
+  .route-line{
+    position:absolute;
+    left:9px;top:6px;bottom:6px;
+    width:1.5px;
+    background:#3E5F6E;
+  }
+  .route-line-fill{
+    position:absolute;
+    left:9px;top:6px;
+    width:1.5px;
+    background:var(--brick);
+    height:0%;
+    animation:fillLine 1.6s ease-out 0.3s forwards;
+  }
+  @keyframes fillLine{ to { height:100%; } }
+  .route-stop{
+    position:relative;
+    padding:0 0 26px 30px;
+  }
+  .route-stop:last-child{padding-bottom:0;}
+  .route-stop .node{
+    position:absolute;left:3px;top:3px;
+    width:13px;height:13px;border-radius:50%;
+    background:var(--navy);
+    border:2px solid #7A93A0;
+  }
+  .route-stop.active .node{border-color:var(--brick);}
+  .route-stop .time{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    color:#EDEEEA;
+  }
+  .route-stop .place{
+    font-size:13px;
+    color:#AEC3CB;
+    margin-top:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .route-line-fill{animation:none;height:100%;}
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .hero{padding:56px 0 44px;}
+    .hero-facts{flex-wrap:wrap;row-gap:18px;}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:78px 0;}
+  .section-head{
+    display:grid;
+    grid-template-columns:0.9fr 1.4fr;
+    gap:48px;
+    margin-bottom:44px;
+  }
+  .section-head h2{font-size:clamp(26px,3vw,34px);}
+  .section-head p{color:var(--muted);font-size:16px;max-width:44ch;}
+  @media (max-width:760px){
+    .section-head{grid-template-columns:1fr;gap:14px;}
+  }
+
+  /* ---------- Services (rows, not cards) ---------- */
+  .services{border-top:1px solid var(--line-soft);}
+  .service-row{
+    display:grid;
+    grid-template-columns:0.9fr 1.4fr;
+    gap:48px;
+    padding:28px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .service-row:first-of-type{border-top:1px solid var(--line-soft);}
+  .service-row h3{font-size:19px;font-weight:500;}
+  .service-row .desc{color:var(--muted);font-size:15.5px;max-width:50ch;}
+  @media (max-width:760px){
+    .service-row{grid-template-columns:1fr;gap:8px;}
+  }
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    background:var(--navy);
+    color:#EAF1EF;
+  }
+  .stats .wrap{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:32px;
+  }
+  .stat strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:28px;
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .stat span{
+    font-size:13.5px;
+    color:#CFE1DC;
+  }
+  @media (max-width:760px){
+    .stats .wrap{grid-template-columns:1fr 1fr;row-gap:28px;}
+  }
+
+  /* ---------- How it works ---------- */
+  .steps{counter-reset: step;}
+  .step{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .step:first-child{border-top:1px solid var(--line-soft);}
+  .step .num{
+    counter-increment:step;
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    color:var(--brick);
+  }
+  .step .num::before{content: counter(step, decimal-leading-zero);}
+  .step h3{font-size:17.5px;font-weight:500;margin-bottom:5px;}
+  .step p{color:var(--muted);font-size:15px;max-width:56ch;}
+
+  /* ---------- Contact / intake ---------- */
+  .contact{background:var(--paper-raised);}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:56px;
+  }
+  .contact-info h2{font-size:clamp(26px,3vw,32px);margin-bottom:16px;}
+  .contact-info p{color:var(--muted);font-size:15.5px;max-width:38ch;}
+  .contact-detail{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+  .contact-detail div{margin-bottom:14px;font-size:14.5px;}
+  .contact-detail .label{color:var(--muted);font-size:12.5px;margin-bottom:2px;}
+
+  .ticket{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:28px;
+  }
+  .ticket-top{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:20px;
+    padding-bottom:16px;
+    border-bottom:1px dashed var(--line);
+  }
+  .ticket-top span{font-size:12.5px;color:var(--muted);}
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--navy);
+    outline-offset:1px;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  textarea{resize:vertical;min-height:88px;}
+  .ticket .btn{width:100%;margin-top:6px;padding:13px;font-size:15px;}
+  .form-note{font-size:12.5px;color:var(--muted);margin-top:12px;}
+  @media (max-width:860px){
+    .contact-grid{grid-template-columns:1fr;gap:36px;}
+    .field-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:36px 0;
+    border-top:1px solid var(--line-soft);
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:14px;
+  }
+  footer .foot-links{display:flex;gap:22px;font-size:13.5px;color:var(--muted);}
+  footer .foot-links a{text-decoration:none;}
+  footer .copy{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="wordmark"><span class="dot"></span>Acute Stays</a>
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn">Request a quote</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Time-critical medical transport, run like clockwork.</h1>
+        <p class="lede">Acute Stays dispatches insured, certified drivers for specimen, blood, and pharmaceutical courier routes across the Twin Cities metro — on your schedule, under one point of contact.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn">Request a quote</a>
+          <a href="#services" class="btn btn-ghost">See what we move</a>
+        </div>
+        <div class="hero-facts">
+          <span><strong>3</strong>insured drivers on the road</span>
+          <span><strong>MN</strong>licensed &amp; state-verified</span>
+          <span><strong>1</strong>point of contact for scheduling</span>
+        </div>
+      </div>
+
+      <div class="route-card">
+        <div class="route-label">How a route runs</div>
+        <div class="route-track">
+          <div class="route-line"></div>
+          <div class="route-line-fill"></div>
+          <div class="route-stop active">
+            <div class="node"></div>
+            <div class="time">Pickup</div>
+            <div class="place">Collection site, on your schedule</div>
+          </div>
+          <div class="route-stop active">
+            <div class="node"></div>
+            <div class="time">Delivery</div>
+            <div class="place">Lab or facility drop-off, on time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we move</h2>
+        <p>Routine and time-critical courier work for labs, clinics, and blood centers — handled by drivers who are insured, licensed, and trained for it.</p>
+      </div>
+
+      <div class="service-row">
+        <h3>Specimen &amp; lab courier</h3>
+        <p class="desc">Routine and STAT pickups between clinics, physician offices, and testing labs, with chain-of-custody handling on every stop.</p>
+      </div>
+      <div class="service-row">
+        <h3>Blood &amp; blood product transport</h3>
+        <p class="desc">Cold-chain handling with documented temperature control, for donor centers, hospitals, and blood banks.</p>
+      </div>
+      <div class="service-row">
+        <h3>Scheduled contract routes</h3>
+        <p class="desc">Recurring daily or weekly pickup-and-delivery schedules, built around your hours and stop list — not ours.</p>
+      </div>
+      <div class="service-row">
+        <h3>On-call &amp; overflow coverage</h3>
+        <p class="desc">Backup capacity for the days your own courier network runs short, without a long-term staffing commitment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stat">
+        <strong>3 drivers</strong>
+        <span>Fully insured, own-vehicle fleet</span>
+      </div>
+      <div class="stat">
+        <strong>HIPAA</strong>
+        <span>&amp; bloodborne pathogens certified</span>
+      </div>
+      <div class="stat">
+        <strong>Twin Cities</strong>
+        <span>Metro coverage, expandable by route</span>
+      </div>
+      <div class="stat">
+        <strong>LLC</strong>
+        <span>Licensed Minnesota business</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How a contract starts</h2>
+        <p>From first call to a running route, there's one process and one contact throughout.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num"></div>
+          <div>
+            <h3>Tell us about your route</h3>
+            <p>Pickup and drop-off locations, schedule, stop count, and any handling requirements — cold chain, STAT windows, or otherwise.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num"></div>
+          <div>
+            <h3>We scope it</h3>
+            <p>We confirm timing, assign a driver, and line up any equipment needed — coolers, temperature logs, documentation.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num"></div>
+          <div>
+            <h3>We run it</h3>
+            <p>A certified, insured driver handles pickups and deliveries on schedule, every time out.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num"></div>
+          <div>
+            <h3>We stay in touch</h3>
+            <p>One point of contact for schedule changes, added stops, or anything that comes up — no call center, no runaround.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <h2>Request a quote</h2>
+        <p>Tell us about your route and we'll follow up with pricing and next steps — usually within one business day.</p>
+
+        <div class="contact-detail">
+          <div>
+            <div class="label">Phone</div>
+            <div>[Add phone number]</div>
+          </div>
+          <div>
+            <div class="label">Email</div>
+            <div>[Add email address]</div>
+          </div>
+          <div>
+            <div class="label">Service area</div>
+            <div>Twin Cities metro, Minnesota</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <span>New service request</span>
+          <span id="ticket-date"></span>
+        </div>
+        <form id="quote-form">
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input type="text" id="company">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone">
+            </div>
+          </div>
+          <div class="field">
+            <label for="service">Service needed</label>
+            <select id="service">
+              <option>Specimen &amp; lab courier</option>
+              <option>Blood &amp; blood product transport</option>
+              <option>Scheduled contract route</option>
+              <option>On-call / overflow coverage</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Route details or message</label>
+            <textarea id="message" placeholder="Pickup/drop-off locations, schedule, stop count, timing..."></textarea>
+          </div>
+          <button type="submit" class="btn">Send request</button>
+          <p class="form-note">Opens your email app with this filled in — swap in the real inbox before launch.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="wordmark"><span class="dot"></span>Acute Stays</a>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="copy">Minnesota-licensed medical courier &amp; dispatch</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ticket-date').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  document.getElementById('quote-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name').value;
+    var company = document.getElementById('company').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var service = document.getElementById('service').value;
+    var message = document.getElementById('message').value;
+
+    var subject = 'Quote request: ' + service;
+    var body = 'Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\nPhone: ' + phone + '\nService: ' + service + '\n\nDetails:\n' + message;
+
+    // TODO: replace with your real business email address
+    var mailto = 'mailto:hello@yourdomain.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+  });
+</script>
+
+</body>
+</html>
